@@ -12,12 +12,21 @@ services:
     server:
         restart: always
         build:
-            context: .
+            context: ./server
         ports:
-            - "3000:3000"
+            - "3001:3001"
         env_file:
-            - ./config/.env
+            - ./server/config/.env
         depends_on:
             - db
         volumes:
-            - ./src:/usr/app/src
+            - ./server/src:/usr/app/src
+    ui:
+        restart: always
+        build:
+            context: ./ui
+        ports: 
+            - "3000:3000"
+        volumes:
+            - ./ui/src:/usr/app/src
+        stdin_open: true

@@ -1,0 +1,1 @@
+export const getTransactionsFromState = state => state.transactions
