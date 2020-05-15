@@ -1,0 +1,27 @@
+env:
+  commonjs: true
+  es6: true
+extends:
+  - 'eslint:recommended'
+  - 'plugin:node/recommended'
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parserOptions:
+  ecmaVersion: 11
+rules:
+  indent:
+    - error
+    - 2
+  linebreak-style:
+    - error
+    - windows
+  quotes:
+    - error
+    - single
+  semi:
+    - off 
+  node/no-deprecated-api:
+    - error
+  node/no-extraneous-require:
+    - off

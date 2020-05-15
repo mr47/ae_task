@@ -1,0 +1,23 @@
+version: "3"
+services:
+    db:
+        image: mysql:8
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: test_root_secret
+            MYSQL_USER: test_user
+            MYSQL_PASSWORD: test_secret
+            MYSQL_DATABASE: test_db
+    server:
+        restart: always
+        build:
+            context: .
+        ports:
+            - "3000:3000"
+        env_file:
+            - ./config/.env
+        depends_on:
+            - db
+        volumes:
+            - ./src:/usr/app/src
