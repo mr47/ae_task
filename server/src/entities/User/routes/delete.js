@@ -1,6 +1,6 @@
 
 const { statusCodes } = require('../../../frameworks/api/routes/constants')
-const { SERVER_ERROR, SUCCESS_DELETED } = statusCodes
+const { ERROR_SERVER, SUCCESS_DELETED } = statusCodes
 
 function deleteRoutesDecorator({ router, User }) {
   router.delete('/:id', async (req, res) => {
@@ -8,7 +8,7 @@ function deleteRoutesDecorator({ router, User }) {
       await User.deleteById(req.params.id)
       res.status(SUCCESS_DELETED).send()
     } catch (err) {
-      res.status(SERVER_ERROR).send({ error: err.message }) 
+      res.status(ERROR_SERVER).send({ error: err.message }) 
     }
   })
 }

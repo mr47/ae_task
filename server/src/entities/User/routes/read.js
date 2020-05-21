@@ -1,5 +1,5 @@
 const { statusCodes } = require('../../../frameworks/api/routes/constants')
-const { SERVER_ERROR, SUCCESS_READ } = statusCodes
+const { ERROR_SERVER, SUCCESS_READ } = statusCodes
 
 function readRoutesDecorator({ router, User }) {
   router.get('/', async (req, res) => {
@@ -7,7 +7,7 @@ function readRoutesDecorator({ router, User }) {
       const allUsers = await User.getAll()
       res.status(SUCCESS_READ).send(allUsers)
     } catch (err) {
-      res.status(SERVER_ERROR).send({ error: err.message }) 
+      res.status(ERROR_SERVER).send({ error: err.message }) 
     }
   })
 }
