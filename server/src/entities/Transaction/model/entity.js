@@ -5,7 +5,7 @@ module.exports.TransactionEntity = (DataTypes) => ({
     validate: {
       isIn: {
         args: [['credit', 'debit']],
-        msg: 'Sorry, credit/debit transactions are supported only'
+        msg: 'Sorry, credit or debit transactions are supported only'
       }
     }
   },
