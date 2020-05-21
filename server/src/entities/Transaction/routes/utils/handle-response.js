@@ -1,8 +1,8 @@
+const { successResponse, errorResponse } = require ('../../../../frameworks/api/routes/response-handler')
 const { CONCURRENCY_ERROR, INVALID_TRANSACTION, INVALID_AMOUNT, NO_FUNDS, NOT_FOUND } = require ('../../utils/constants')
 const { statusCodes } = require('../../../../frameworks/api/routes/constants')
 const { ERROR_SERVER, SUCCESS_CREATED, SUCCESS_READ, ERROR_NOT_FOUND, FORBIDDEN_TRANSACTION } = statusCodes
 
-const buildErrorBody = (message) => ({ error: message })
 
 const getReadErrorStatusCode = (err) => {
   if (err === NOT_FOUND) return ERROR_NOT_FOUND
@@ -16,18 +16,10 @@ const getCreatedErrorStatusCode = (err) => {
   return ERROR_SERVER
 }
 
-module.exports.createdSuccessResponse = (res, body) => res
-  .status(SUCCESS_CREATED)
-  .send(body)
+module.exports.createdSuccessResponse = (res, body) => successResponse(res, SUCCESS_CREATED, body)
 
-module.exports.readSuccessResponse = (res, body) => res
-  .status(SUCCESS_READ)
-  .send(body)
+module.exports.readSuccessResponse = (res, body) => successResponse(res, SUCCES_READ, body)
 
-module.exports.readErrorResponse = (res, err) => res
-  .status(getReadErrorStatusCode(err))
-  .send(buildErrorBody(err))
+module.exports.readErrorResponse = (res, err) => errorResponse(res, getReadErrorStatusCode(err), err)
 
-module.exports.createdErrorResponse = (res, err) => res
-    .status(getCreatedErrorStatusCode(err))
-    .send(buildErrorBody(err))
+module.exports.createdErrorResponse = (res, err) => errorResponse(res, getCreatedErrorStatusCode(err), err)
