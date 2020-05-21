@@ -1,14 +1,12 @@
-
-const { statusCodes } = require('../../../frameworks/api/routes/constants')
-const { ERROR_SERVER, SUCCESS_UPDATED } = statusCodes
+const { updatedSuccessResponse, updatedErrorResponse } = require('./utils/handle-response')
 
 function updateRoutesDecorator({ router, User }) {
   router.put('/:id', async (req, res) => {
     try {
       const updates = await User.updateById(req.params.id, req.body)
-      res.status(SUCCESS_UPDATED).send(`Values changed: ${updates[1]}`)
+      return updatedSuccessResponse(res, `Values changed: ${updates[1]}`)
     } catch (err) {
-      res.status(ERROR_SERVER).send({ error: err.message }) 
+      return updatedErrorResponse(res, err.message)
     }
   })
 }
