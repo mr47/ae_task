@@ -1,6 +1,6 @@
 const { app } = require('./app')
-const { db } = require('./db')
-const { User } = require('./db/models/User')
+const { db } = require('./frameworks/db')
+const { User } = require('./entities/User/model')
 const { PORT } = process.env
 
 const mockGlobalUser = async () => {

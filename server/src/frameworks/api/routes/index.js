@@ -1,5 +1,5 @@
-const userRouter = require('./User')
-const transactionRouter = require('./Transaction')
+const userRouter = require('../../../entities/User/routes')
+const transactionRouter = require('../../../entities/Transaction/routes')
 
 function setRoutes(app) {
   app.use('/users', userRouter)

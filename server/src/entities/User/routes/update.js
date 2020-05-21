@@ -1,9 +1,8 @@
 
-const { statusCodes } = require('../constants')
-const { User } = require('../../db/models/User')
+const { statusCodes } = require('../../../frameworks/api/routes/constants')
 const { SERVER_ERROR, SUCCESS_UPDATED } = statusCodes
 
-function updateRoutesDecorator({ router }) {
+function updateRoutesDecorator({ router, User }) {
   router.put('/:id', async (req, res) => {
     try {
       const updates = await User.updateById(req.params.id, req.body)

@@ -1,8 +1,7 @@
-const { statusCodes } = require('../constants')
-const { Transaction } = require('../../db/models/Transaction')
+const { statusCodes } = require('../../../frameworks/api/routes/constants')
 const { SERVER_ERROR, SUCCESS_READ } = statusCodes
 
-function readRoutesDecorator({ router }) {
+function readRoutesDecorator({ router, Transaction }) {
   router.get('/', async (req, res) => {
     try {
       const allTransactions = await Transaction.getAll()

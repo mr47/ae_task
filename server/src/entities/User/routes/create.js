@@ -1,8 +1,7 @@
-const { statusCodes } = require('../constants')
-const { User } = require('../../db/models/User')
+const { statusCodes } = require('../../../frameworks/api/routes/constants')
 const { SERVER_ERROR, SUCCESS_CREATED } = statusCodes
 
-function createRoutesDecorator({ router }) {
+function createRoutesDecorator({ router, User }) {
   router.post('/', async (req, res) => {
     try {
       const newUser = await User.createOne(req.body)

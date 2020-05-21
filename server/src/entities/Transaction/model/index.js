@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize')
-const { sequelizeClient } = require('../../drivers/sequelize-client')
+const { sequelizeClient } = require('../../../frameworks/db/drivers/sequelize-client')
 const { TransactionEntity } = require('./entity')
 const { transactionControllersDecorator } = require('./controllers')
 

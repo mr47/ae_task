@@ -1,8 +1,7 @@
-const { statusCodes } = require('../constants')
-const { User } = require('../../db/models/User')
+const { statusCodes } = require('../../../frameworks/api/routes/constants')
 const { SERVER_ERROR, SUCCESS_READ } = statusCodes
 
-function readRoutesDecorator({ router }) {
+function readRoutesDecorator({ router, User }) {
   router.get('/', async (req, res) => {
     try {
       const allUsers = await User.getAll()

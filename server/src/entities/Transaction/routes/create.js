@@ -1,8 +1,7 @@
-const { statusCodes } = require('../constants')
-const { Transaction } = require('../../db/models/Transaction')
+const { statusCodes } = require('../../../frameworks/api/routes/constants')
 const { SERVER_ERROR, SUCCESS_CREATED, FORBIDDEN_TRANSACTION } = statusCodes
 
-function createRoutesDecorator({ router }) {
+function createRoutesDecorator({ router, Transaction }) {
   router.post('/', async (req, res) => {
     try {
       const transaction = await Transaction.createOne(req.body)

@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
-const { setRoutes } = require('./routes')
-const { logger } = require('./middleware/logger')
+const { setRoutes } = require('./frameworks/api/routes')
+const { logger } = require('./frameworks/api/middleware/logger')
 
 const app = express()
 

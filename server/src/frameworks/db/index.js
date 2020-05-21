@@ -2,8 +2,8 @@ const { sequelizeClient } = require('./drivers/sequelize-client')
 const { loadModels, createAssociations } = require('./drivers/sequelize-init')
 
 const models = [
-  { name: 'User', model: require('./models/User') },
-  { name: 'Transaction', model: require('./models/Transaction') }
+  { name: 'User', model: require('../../entities/User/model') },
+  { name: 'Transaction', model: require('../../entities/Transaction/model') }
 ]
 
 const db = {}

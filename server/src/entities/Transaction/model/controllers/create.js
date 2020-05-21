@@ -1,4 +1,4 @@
-const { User } = require('../../User')
+const { User } = require('../../../User/model')
 const { CREDIT_TRANSACTION, DEBIT_TRANSACTION } = require ('../constants')
 
 const handleCreditTransaction = async (user, amount) => {
