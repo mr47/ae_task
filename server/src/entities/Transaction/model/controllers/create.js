@@ -1,6 +1,7 @@
 const { User } = require('../../../User/model')
+const { isValidAmount, isValidType } = require('../entity')
 const { ConcurrencyManager } = require('../controllers/concurrency-manager')
-const { CREDIT_TRANSACTION, DEBIT_TRANSACTION, INVALID_TRANSACTION, INVALID_AMOUNT, NO_FUNDS } = require ('../../utils/constants')
+const { CREDIT_TRANSACTION, DEBIT_TRANSACTION, NO_FUNDS } = require ('../../utils/constants')
 
 const handleCreditTransaction = async (user, amount) => {
   user.balance += amount
@@ -16,7 +17,6 @@ const handleDebitTransaction = async (user, amount) => {
 const performTransaction = async (type, amount, user) => {
   if (type === CREDIT_TRANSACTION) return handleCreditTransaction(user, amount)
   if (type === DEBIT_TRANSACTION) return handleDebitTransaction(user, amount)
-  throw INVALID_TRANSACTION
 }
 
 const handleTransaction = async ({ type, amount }, user) => ConcurrencyManager.doTransaction(
@@ -24,10 +24,12 @@ const handleTransaction = async ({ type, amount }, user) => ConcurrencyManager.d
   async () => performTransaction(type, amount, user)
 )
 
+const validateTransaction = ({ type, amount }) => isValidType(type) && isValidAmount(amount) 
+
 module.exports.setCreateControllers = (Transaction) => {
   Transaction.createOne = async ({ type, amount }) => {
-    if (amount < 1) throw INVALID_AMOUNT
     const user = User.globalUser
+    validateTransaction({ type, amount })
     await handleTransaction({ type, amount }, user)
     return Transaction.create({ type, amount })
   }

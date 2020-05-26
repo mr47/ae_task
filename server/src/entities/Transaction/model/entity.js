@@ -1,3 +1,5 @@
+const { CREDIT_TRANSACTION, DEBIT_TRANSACTION, INVALID_TRANSACTION, INVALID_AMOUNT } = require('../utils/constants')
+
 module.exports.TransactionEntity = (DataTypes) => ({
   type: {
     type: DataTypes.STRING,
@@ -20,3 +22,13 @@ module.exports.TransactionEntity = (DataTypes) => ({
     }
   },
 })
+
+module.exports.isValidType = (type) => {
+  if ([CREDIT_TRANSACTION, DEBIT_TRANSACTION].indexOf(type) !== -1) return true
+  throw INVALID_TRANSACTION
+}
+
+module.exports.isValidAmount = (amount) => {
+  if (Number.isInteger(amount) && amount >= 1) return true
+  throw INVALID_AMOUNT
+}

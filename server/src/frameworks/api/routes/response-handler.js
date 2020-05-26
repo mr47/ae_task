@@ -6,4 +6,4 @@ module.exports.successResponse = (res, statusCode, body) => res
 
 module.exports.errorResponse = (res, statusCode, error) => res
   .status(statusCode)
-  .send(buildErrorBody(error))
+  .send(statusCode === 500 ? 'Unhandled Error' : buildErrorBody(error))
