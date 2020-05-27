@@ -10,20 +10,18 @@ const { expect } = chai
 
 describe('Web Service', function() {
   context('Server listening', function() {
-    afterEach(() => {
-      sinon.restore();
-    })
+    afterEach(() => sinon.restore())
 
     it('Expect a valid response from GET "/"', async () => {
       const res = await chai.request(app).get('/')
       expect(res).to.have.status(200)
     })
 
-    it('Expect to validate database connection on serving app', () => {
+    it('Expect to validate database connection on serving app', async () => {
       sinon.replace(app, 'listen', sinon.fake())
       sinon.replace(db.client, 'authenticate', sinon.fake())
       sinon.replace(db.client, 'sync', sinon.fake())
-      start(false)
+      await start(false)
       expect(app.listen.calledOnce)
       expect(db.client.authenticate.calledOnce)
       expect(db.client.sync.calledOnce)

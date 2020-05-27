@@ -22,6 +22,15 @@ docker-compose up --build -d
 
 Feel free to change the server listening port in `./config/.env`, and check `docker-compose.yml` for database configuration.
 
+### Test Suite
+
+You can run the current test suite both inside the server container or from the project folder, in the last case, please remember to install all dependencies first with `npm install`.
+
+```
+docker-compose exec server sh
+npm run test
+```
+
 #### Available Requests
 
 [Postman Collection here!](https://documenter.getpostman.com/view/7772202/Szmk1G1e?version=latest)
