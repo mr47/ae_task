@@ -6,6 +6,7 @@ function createRoutesDecorator({ router, Transaction }) {
       const transaction = await Transaction.createOne(req.body)
       return createdSuccessResponse(res, transaction)
     } catch (err) {
+      console.log(err)
       return createdErrorResponse(res, err)
     }
   })
