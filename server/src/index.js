@@ -12,7 +12,7 @@ const mockGlobalUser = async () => {
   User.globalUser = user
 }
 
-const start = async () => {
+const start = async (retry = true) => {
   try {
     await db.client.authenticate()
     await db.client.sync()
@@ -20,10 +20,17 @@ const start = async () => {
     console.log('Connecting to Database... OK!')
     app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))
   } catch (err) {
-    console.log('Error connecting to database, retrying in 5 seconds...')
     console.log(`Details: ${err.message}`)
-    setTimeout(async () => start(), 5000)
+    if (retry) {
+      console.log('Error connecting to database, retrying in 5 seconds...')
+      setTimeout(async () => start(), 5000)
+    }
   }
 }
 
-start()
+if (module.parent) {
+  // Export for testing only
+  module.exports = { start }
+} else {
+  start()
+}

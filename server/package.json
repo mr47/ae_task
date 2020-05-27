@@ -6,8 +6,8 @@
   "scripts": {
     "start": "env-cmd --file ./config/.env node src/index.js",
     "dev": "env-cmd --file ./config/.env nodemon src/index.js",
-    "lint": "node_modules/.bin/eslint --ext .js ./src",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --ext .js ./src",
+    "test": "mocha ./src/**/*.test.js"
   },
   "keywords": [],
   "author": "",
@@ -16,12 +16,16 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql2": "^2.1.0",
-    "sequelize": "^5.21.8"
+    "sequelize": "^5.21.8",
+    "sinon": "^9.0.2"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "env-cmd": "^10.1.0",
     "eslint": "^7.0.0",
     "eslint-plugin-node": "^11.1.0",
+    "mocha": "^7.2.0",
     "nodemon": "^2.0.3"
   }
 }

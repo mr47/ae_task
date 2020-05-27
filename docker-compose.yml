@@ -21,6 +21,7 @@ services:
             - db
         volumes:
             - ./server/src:/usr/app/src
+            - ./server/tests:/usr/app/tests
     ui:
         restart: always
         build:
